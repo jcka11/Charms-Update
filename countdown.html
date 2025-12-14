@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown Timer</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #0f0f0f;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #container {
+      text-align: center;
+    }
+
+    #timer {
+      font-size: 48px;
+      font-weight: bold;
+      color: white;
+    }
+
+    #photo {
+      width: 600px;        /* Adjust this width to make it bigger or smaller */
+      max-width: 95%;      /* ensures it fits on smaller screens */
+      height: auto;
+      margin-top: 20px;    /* space above image */
+      border-radius: 12px; /* optional rounded corners */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="timer">Loading...</div>
+    <img src="photo.jpg" id="photo" alt="My Image">
+  </div>
+
+  <script>
+    // Countdown target date (December 14, 2025, 16:00 UTC)
+    const targetDate = new Date("2025-12-14T16:00:00Z");
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").innerText = "Time's up!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("timer").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>
